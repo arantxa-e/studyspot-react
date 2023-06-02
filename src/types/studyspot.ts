@@ -25,9 +25,15 @@ export interface StudySpot {
   name: string;
   description: string;
   location: {
-    type: "Point";
-    coordinates: [number, number];
-    address: string;
+    type: "Feature";
+    geometry: {
+      type: "Point";
+      coordinates: [number, number];
+    };
+    properties: {
+      name: string;
+      address: string;
+    };
   };
   phoneNumber: string;
   hours: HoursOfOperation;

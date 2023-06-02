@@ -7,7 +7,7 @@ export const studySpotApi = createApi({
   reducerPath: "studySpotApi",
   baseQuery: fetchBaseQuery({ baseUrl }),
   endpoints: (builder) => ({
-    getStudySpots: builder.query<StudySpot, void>({
+    getStudySpots: builder.query<Array<StudySpot>, void>({
       query: () => `/studyspots`,
     }),
   }),
