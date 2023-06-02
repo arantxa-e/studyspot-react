@@ -1,5 +1,7 @@
+import { Map } from "./layout";
+
 function App() {
-  return <>Hello World</>;
+  return <Map />;
 }
 
 export default App;
