@@ -11,3 +11,9 @@ export interface LocationOption {
     type: "Point";
   };
 }
+
+export interface MapViewState {
+  longitude: number;
+  latitude: number;
+  zoom: number;
+}
