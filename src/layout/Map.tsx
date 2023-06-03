@@ -4,21 +4,35 @@ import { useGetStudySpotsQuery } from "../services/studySpot";
 import { useState, useEffect } from "react";
 import { LayerProps } from "react-map-gl";
 import { Search } from ".";
+import { LocationOption } from "../types";
 
 export const Map = () => {
   const { data } = useGetStudySpotsQuery();
   const [geojson, setGeojson] = useState<GeoJSONSourceOptions["data"]>();
+  const [selectedLocation, setSelectedLocation] = useState<LocationOption>();
+  useState<GeoJSONSourceOptions["data"]>();
+
   const [viewState, setViewState] = useState({
     longitude: -100,
     latitude: 40,
-    zoom: 10,
+    zoom: 14,
   });
-  const layerStyle: LayerProps = {
-    id: "point",
+
+  const studySpotStyles: LayerProps = {
+    id: "studySpotStyles",
     type: "circle",
     paint: {
       "circle-radius": 10,
       "circle-color": "#007cbf",
+    },
+  };
+
+  const selectedLocationStyles: LayerProps = {
+    id: "selectedLocationStyles",
+    type: "circle",
+    paint: {
+      "circle-radius": 10,
+      "circle-color": "#FF0000",
     },
   };
 
@@ -49,7 +63,10 @@ export const Map = () => {
 
   return (
     <>
-      <Search setViewState={setViewState} />
+      <Search
+        setViewState={setViewState}
+        setSelectedLocation={setSelectedLocation}
+      />
       <MapboxMap
         reuseMaps
         mapboxAccessToken={import.meta.env.VITE_MAPBOX_ACCESS_TOKEN}
@@ -59,8 +76,18 @@ export const Map = () => {
         mapStyle="mapbox://styles/mapbox/streets-v9"
       >
         {geojson && (
-          <Source id="my-data" type="geojson" data={geojson}>
-            <Layer {...layerStyle} />
+          <Source id="studySpots" type="geojson" data={geojson}>
+            <Layer {...studySpotStyles} />
+          </Source>
+        )}
+
+        {selectedLocation && (
+          <Source
+            id="selectedLocation"
+            type="geojson"
+            data={selectedLocation.geometry}
+          >
+            <Layer {...selectedLocationStyles} />
           </Source>
         )}
         <NavigationControl showZoom position="top-right" />
