@@ -1,32 +1,16 @@
 import MapboxMap, { Marker, NavigationControl } from "react-map-gl";
 import { useGetStudySpotsQuery } from "../services/studySpot";
-import React, { useState, useEffect } from "react";
-import { LocationOption } from "../types";
+import React from "react";
+import { LocationOption, MapViewState } from "../types";
 import MarkerIcon from "../assets/mapbox-icon.png";
 import "mapbox-gl/dist/mapbox-gl.css";
 
-export const Map: React.FC<{ selectedLocation: LocationOption }> = ({
-  selectedLocation,
-}) => {
+export const Map: React.FC<{
+  selectedLocation?: LocationOption;
+  viewState: MapViewState;
+  setViewState: React.Dispatch<React.SetStateAction<MapViewState>>;
+}> = ({ selectedLocation, viewState, setViewState }) => {
   const { data } = useGetStudySpotsQuery();
-
-  const [viewState, setViewState] = useState({
-    longitude: -100,
-    latitude: 40,
-    zoom: 14,
-  });
-
-  useEffect(() => {
-    if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition((position) =>
-        setViewState((state) => ({
-          ...state,
-          latitude: position.coords.latitude,
-          longitude: position.coords.longitude,
-        }))
-      );
-    }
-  }, []);
 
   return (
     <>
