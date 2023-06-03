@@ -1,40 +1,20 @@
-import MapboxMap, { Source, Layer, NavigationControl } from "react-map-gl";
-import { GeoJSONSourceOptions } from "mapbox-gl";
+import MapboxMap, { Marker, NavigationControl } from "react-map-gl";
 import { useGetStudySpotsQuery } from "../services/studySpot";
 import { useState, useEffect } from "react";
-import { LayerProps } from "react-map-gl";
 import { Search } from ".";
 import { LocationOption } from "../types";
+import MarkerIcon from "../assets/mapbox-icon.png";
+import "mapbox-gl/dist/mapbox-gl.css";
 
 export const Map = () => {
   const { data } = useGetStudySpotsQuery();
-  const [geojson, setGeojson] = useState<GeoJSONSourceOptions["data"]>();
   const [selectedLocation, setSelectedLocation] = useState<LocationOption>();
-  useState<GeoJSONSourceOptions["data"]>();
 
   const [viewState, setViewState] = useState({
     longitude: -100,
     latitude: 40,
     zoom: 14,
   });
-
-  const studySpotStyles: LayerProps = {
-    id: "studySpotStyles",
-    type: "circle",
-    paint: {
-      "circle-radius": 10,
-      "circle-color": "#007cbf",
-    },
-  };
-
-  const selectedLocationStyles: LayerProps = {
-    id: "selectedLocationStyles",
-    type: "circle",
-    paint: {
-      "circle-radius": 10,
-      "circle-color": "#FF0000",
-    },
-  };
 
   useEffect(() => {
     try {
@@ -52,15 +32,6 @@ export const Map = () => {
     }
   }, []);
 
-  useEffect(() => {
-    if (data) {
-      setGeojson({
-        type: "FeatureCollection" as const,
-        features: data?.map((studySpot) => studySpot.location),
-      });
-    }
-  }, [data]);
-
   return (
     <>
       <Search
@@ -75,21 +46,37 @@ export const Map = () => {
         style={{ width: "100%", height: "100%" }}
         mapStyle="mapbox://styles/mapbox/streets-v9"
       >
-        {geojson && (
-          <Source id="studySpots" type="geojson" data={geojson}>
-            <Layer {...studySpotStyles} />
-          </Source>
-        )}
+        {data?.map((studySpot) => {
+          return (
+            <Marker
+              key={studySpot.name}
+              longitude={studySpot.location.geometry.coordinates[0]}
+              latitude={studySpot.location.geometry.coordinates[1]}
+              style={{ cursor: "pointer" }}
+            >
+              <img
+                src={MarkerIcon}
+                alt={studySpot.name}
+                style={{ width: "50px", height: "50px" }}
+              />
+            </Marker>
+          );
+        })}
 
         {selectedLocation && (
-          <Source
-            id="selectedLocation"
-            type="geojson"
-            data={selectedLocation.geometry}
+          <Marker
+            longitude={selectedLocation.geometry.coordinates[0]}
+            latitude={selectedLocation.geometry.coordinates[1]}
+            style={{ cursor: "pointer" }}
           >
-            <Layer {...selectedLocationStyles} />
-          </Source>
+            <img
+              src={MarkerIcon}
+              alt="Selected location"
+              style={{ width: "50px", height: "50px" }}
+            />
+          </Marker>
         )}
+
         <NavigationControl showZoom position="top-right" />
       </MapboxMap>
     </>
