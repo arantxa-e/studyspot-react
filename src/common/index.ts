@@ -1,2 +1,3 @@
 export * from "./Logo";
-export * from "./StudySpotCard.tsx";
+export * from "./StudySpotCard";
+export * from "./BusinessHours";
