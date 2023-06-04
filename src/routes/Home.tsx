@@ -1,8 +1,12 @@
 import { Map, Search } from "../layout";
+import { StudySpotCard } from "../common";
 import { useState, useEffect } from "react";
-import { LocationOption, MapViewState } from "../types";
+import { LocationOption, MapViewState, StudySpot } from "../types";
+import { useLoaderData } from "react-router";
 
 export const Home = () => {
+  const studySpots = useLoaderData() as Array<StudySpot>;
+
   const [selectedLocation, setSelectedLocation] = useState<
     LocationOption | undefined
   >();
@@ -36,6 +40,9 @@ export const Home = () => {
         setViewState={setViewState}
         selectedLocation={selectedLocation}
       />
+      {studySpots.map((studySpot) => (
+        <StudySpotCard key={studySpot._id} data={studySpot} />
+      ))}
     </div>
   );
 };
