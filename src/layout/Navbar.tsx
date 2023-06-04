@@ -1,8 +1,10 @@
 import { AppBar, Toolbar, Typography, Button } from "@mui/material";
 import { NavLink, useNavigate } from "react-router-dom";
+import { useAppSelector } from "../hooks";
 
 export const Navbar = () => {
   const navigate = useNavigate();
+  const user = useAppSelector((state) => state.auth.user);
 
   return (
     <>
@@ -12,12 +14,23 @@ export const Navbar = () => {
             <NavLink to="/">StudySpot</NavLink>
           </Typography>
 
-          <Button color="inherit" onClick={() => navigate("/sign-up")}>
-            Sign Up
-          </Button>
-          <Button color="inherit" onClick={() => navigate("/login")}>
-            Log In
-          </Button>
+          {user ? (
+            <>
+              <Typography>{user.displayName}</Typography>
+              <Button color="inherit" onClick={() => navigate("/login")}>
+                Log Out
+              </Button>
+            </>
+          ) : (
+            <>
+              <Button color="inherit" onClick={() => navigate("/sign-up")}>
+                Sign Up
+              </Button>
+              <Button color="inherit" onClick={() => navigate("/login")}>
+                Log In
+              </Button>
+            </>
+          )}
         </Toolbar>
       </AppBar>
     </>
