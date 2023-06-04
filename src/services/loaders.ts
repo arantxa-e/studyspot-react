@@ -1,10 +1,10 @@
 import { LoaderFunctionArgs } from "react-router";
 import { store } from "../store";
-import { studySpotApi } from "./studySpot";
+import { api } from "./api";
 
 export const getStudySpotsLoader = async () => {
   const response = await store
-    .dispatch(studySpotApi.endpoints.getStudySpots.initiate())
+    .dispatch(api.endpoints.getStudySpots.initiate())
     .unwrap();
   return response;
 };
@@ -14,7 +14,7 @@ export const getStudySpotByIdLoader = async ({
 }: LoaderFunctionArgs) => {
   if (!params.id) return;
   const response = await store
-    .dispatch(studySpotApi.endpoints.getStudySpotById.initiate(params.id))
+    .dispatch(api.endpoints.getStudySpotById.initiate(params.id))
     .unwrap();
   return response;
 };

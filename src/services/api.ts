@@ -4,8 +4,8 @@ import { RootState } from "../store";
 
 const baseUrl = import.meta.env.VITE_STUDYSPOT_API_BASE_URL;
 
-export const studySpotApi = createApi({
-  reducerPath: "studySpotApi",
+export const api = createApi({
+  reducerPath: "api",
   baseQuery: fetchBaseQuery({
     baseUrl,
     prepareHeaders: (headers, { getState }) => {
@@ -38,4 +38,4 @@ export const {
   useGetStudySpotsQuery,
   useGetStudySpotByIdQuery,
   useCreateUserMutation,
-} = studySpotApi;
+} = api;
