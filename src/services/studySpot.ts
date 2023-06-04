@@ -10,7 +10,10 @@ export const studySpotApi = createApi({
     getStudySpots: builder.query<Array<StudySpot>, void>({
       query: () => `/studyspots`,
     }),
+    getStudySpotById: builder.query<StudySpot, string>({
+      query: (id) => `/studyspots/${id}`,
+    }),
   }),
 });
 
-export const { useGetStudySpotsQuery } = studySpotApi;
+export const { useGetStudySpotsQuery, useGetStudySpotByIdQuery } = studySpotApi;
