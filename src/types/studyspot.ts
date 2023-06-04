@@ -21,6 +21,7 @@ export interface SocialMediaLinks {
 }
 
 export interface StudySpot {
+  _id: string;
   partner: string;
   name: string;
   description: string;
