@@ -32,7 +32,7 @@ function Copyright() {
   );
 }
 
-export const SignIn = () => {
+export const Login = () => {
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
