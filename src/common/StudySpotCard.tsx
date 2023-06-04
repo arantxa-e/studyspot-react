@@ -7,7 +7,7 @@ import {
   Grid,
 } from "@mui/material";
 import { StudySpot as StudySpotInterface } from "../types";
-import { Logo } from "../common";
+import { Logo } from ".";
 
 export const StudySpotCard: React.FC<{ data: StudySpotInterface }> = ({
   data,
