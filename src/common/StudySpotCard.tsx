@@ -7,11 +7,12 @@ import {
   Grid,
 } from "@mui/material";
 import { StudySpot as StudySpotInterface } from "../types";
-import { Logo } from ".";
+import { Logo, BusinessHours } from ".";
 
-export const StudySpotCard: React.FC<{ data: StudySpotInterface }> = ({
-  data,
-}) => {
+export const StudySpotCard: React.FC<{
+  data: StudySpotInterface;
+  extended?: boolean;
+}> = ({ data, extended = false }) => {
   return (
     <Card>
       <CardContent>
@@ -33,6 +34,13 @@ export const StudySpotCard: React.FC<{ data: StudySpotInterface }> = ({
 
         <Divider />
         <Typography variant="body1">{data.description}</Typography>
+
+        {extended && (
+          <>
+            <Divider />
+            <BusinessHours hours={data.hours} />
+          </>
+        )}
       </CardContent>
     </Card>
   );

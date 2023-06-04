@@ -7,7 +7,7 @@ export const StudySpot = () => {
 
   return (
     <>
-      <StudySpotCard data={data} />
+      <StudySpotCard data={data} extended />
     </>
   );
 };
