@@ -1,16 +1,17 @@
 import MapboxMap, { Marker, NavigationControl } from "react-map-gl";
-import { useGetStudySpotsQuery } from "../services/studySpot";
 import React from "react";
-import { LocationOption, MapViewState } from "../types";
+import { LocationOption, MapViewState, StudySpot } from "../types";
 import MarkerIcon from "../assets/mapbox-icon.png";
 import "mapbox-gl/dist/mapbox-gl.css";
+import { useLoaderData, useNavigate } from "react-router";
 
 export const Map: React.FC<{
   selectedLocation?: LocationOption;
   viewState: MapViewState;
   setViewState: React.Dispatch<React.SetStateAction<MapViewState>>;
 }> = ({ selectedLocation, viewState, setViewState }) => {
-  const { data } = useGetStudySpotsQuery();
+  const data = useLoaderData() as Array<StudySpot>;
+  const navigate = useNavigate();
 
   return (
     <MapboxMap
@@ -28,6 +29,7 @@ export const Map: React.FC<{
             longitude={studySpot.location.geometry.coordinates[0]}
             latitude={studySpot.location.geometry.coordinates[1]}
             style={{ cursor: "pointer" }}
+            onClick={() => navigate(`studyspot/${studySpot._id}`)}
           >
             <img
               src={MarkerIcon}
