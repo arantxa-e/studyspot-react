@@ -25,15 +25,12 @@ export interface StudySpot {
   partner: string;
   name: string;
   description: string;
+  address: string;
   location: {
     type: "Feature";
     geometry: {
       type: "Point";
       coordinates: [number, number];
-    };
-    properties: {
-      name: string;
-      address: string;
     };
   };
   phoneNumber: string;
