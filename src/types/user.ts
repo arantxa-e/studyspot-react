@@ -16,3 +16,13 @@ export interface Partner {
   password: string;
   tokens?: Array<{ token: string }>;
 }
+
+export type AuthenticatedUser = {
+  user: User;
+  token: string;
+};
+
+export type AuthState = {
+  user: User | null;
+  token: string | null;
+};
