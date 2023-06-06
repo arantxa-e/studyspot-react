@@ -6,6 +6,7 @@ import {
   Divider,
   Grid,
   CardActionArea,
+  Rating,
 } from "@mui/material";
 import { StudySpot as StudySpotInterface } from "../types";
 import { Logo, BusinessHours, Reviews } from ".";
@@ -20,9 +21,19 @@ const Details: React.FC<StudySpotInterface> = (data) => {
         </Grid>
 
         <Grid item>
-          <Typography variant="h5" component="h1">
-            {data.name}
-          </Typography>
+          <Grid container>
+            <Grid item>
+              <Typography variant="h5" component="h1">
+                {data.name}
+              </Typography>
+            </Grid>
+            <Grid item>
+              <Rating name="read-only" value={data.rating} readOnly />
+            </Grid>
+            <Grid item>
+              <Typography>{data.rating} / 5</Typography>
+            </Grid>
+          </Grid>
           {data.hasFreeWifi && <Chip label="Free Wifi" />}
           <Typography variant="body2">
             {data.phoneNumber} • {data.address}

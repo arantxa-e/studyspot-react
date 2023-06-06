@@ -52,4 +52,5 @@ export interface StudySpot {
   website?: string;
   socialMedia?: SocialMediaLinks;
   reviews?: Review[];
+  rating: number;
 }
