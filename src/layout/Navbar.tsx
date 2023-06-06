@@ -1,6 +1,7 @@
 import { AppBar, Toolbar, Typography, Button } from "@mui/material";
 import { NavLink, useNavigate } from "react-router-dom";
 import { useAppSelector } from "../hooks";
+import { logoutUserAction } from "../services";
 
 export const Navbar = () => {
   const navigate = useNavigate();
@@ -17,7 +18,7 @@ export const Navbar = () => {
           {user ? (
             <>
               <Typography>{user.displayName}</Typography>
-              <Button color="inherit" onClick={() => navigate("/login")}>
+              <Button color="inherit" onClick={logoutUserAction}>
                 Log Out
               </Button>
             </>

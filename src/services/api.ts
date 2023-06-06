@@ -18,17 +18,33 @@ export const api = createApi({
   }),
 
   endpoints: (builder) => ({
+    // studyspot endpoints
     getStudySpots: builder.query<Array<StudySpot>, void>({
       query: () => `/studyspots`,
     }),
     getStudySpotById: builder.query<StudySpot, string>({
       query: (id) => `/studyspots/${id}`,
     }),
+
+    // user endpoints
     createUser: builder.mutation<AuthenticatedUser, Partial<User>>({
       query: (payload) => ({
         url: "/user",
         method: "post",
         body: payload,
+      }),
+    }),
+    loginUser: builder.mutation<AuthenticatedUser, Partial<User>>({
+      query: (payload) => ({
+        url: "/user/login",
+        method: "post",
+        body: payload,
+      }),
+    }),
+    logoutUser: builder.mutation<void, void>({
+      query: () => ({
+        url: "/user/logout",
+        method: "post",
       }),
     }),
   }),
@@ -38,4 +54,5 @@ export const {
   useGetStudySpotsQuery,
   useGetStudySpotByIdQuery,
   useCreateUserMutation,
+  useLogoutUserMutation,
 } = api;

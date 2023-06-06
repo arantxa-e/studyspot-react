@@ -15,3 +15,23 @@ export const createUserAction = async ({ request }: ActionFunctionArgs) => {
 
   return redirect(`/`);
 };
+
+export const loginUserAction = async ({ request }: ActionFunctionArgs) => {
+  const formData = await request.formData();
+
+  const user = await store
+    .dispatch(api.endpoints.loginUser.initiate(formData as Partial<User>))
+    .unwrap();
+
+  store.dispatch(setCredentials(user));
+
+  return redirect(`/`);
+};
+
+export const logoutUserAction = async () => {
+  await store.dispatch(api.endpoints.logoutUser.initiate()).unwrap();
+
+  store.dispatch(setCredentials({ user: undefined, token: undefined }));
+
+  return redirect(`/`);
+};

@@ -4,6 +4,7 @@ import {
   getStudySpotByIdLoader,
   getStudySpotsLoader,
   createUserAction,
+  loginUserAction,
 } from "./services";
 
 export const router = createBrowserRouter([
@@ -26,7 +27,7 @@ export const router = createBrowserRouter([
         element: <SignUp />,
         action: createUserAction,
       },
-      { path: "/login", element: <Login /> },
+      { path: "/login", element: <Login />, action: loginUserAction },
     ],
   },
 ]);
