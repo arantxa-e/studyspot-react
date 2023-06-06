@@ -16,6 +16,9 @@ const MarkerImage = styled("img")({
   borderRadius: "100%",
   padding: 5,
   background: "#FFFFFF",
+  "&:hover": {
+    transform: "scale(1.15)",
+  },
 });
 
 export const MapMarker: React.FC<MapMarkerProps> = ({
