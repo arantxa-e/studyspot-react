@@ -8,10 +8,10 @@ import {
   CardActionArea,
 } from "@mui/material";
 import { StudySpot as StudySpotInterface } from "../types";
-import { Logo, BusinessHours } from ".";
+import { Logo, BusinessHours, Reviews } from ".";
 import { useNavigate } from "react-router";
 
-const renderDetails = (data: StudySpotInterface) => {
+const Details: React.FC<StudySpotInterface> = (data) => {
   return (
     <CardContent>
       <Grid container spacing={2} alignItems="center">
@@ -45,20 +45,21 @@ export const StudySpotCard: React.FC<{
   return (
     <Card>
       {extended ? (
-        renderDetails(data)
+        <Details {...data} />
       ) : (
         <CardActionArea
           onClick={() => navigate(`/studyspot/${data._id}`)}
           disableRipple
         >
-          {renderDetails(data)}
+          <Details {...data} />
         </CardActionArea>
       )}
       <CardContent>
         {extended && (
           <>
-            <Divider />
             <BusinessHours hours={data.hours} />
+            <Divider />
+            <Reviews reviews={data.reviews} />
           </>
         )}
       </CardContent>

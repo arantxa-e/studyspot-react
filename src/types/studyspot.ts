@@ -20,6 +20,17 @@ export interface SocialMediaLinks {
   snapchat?: string;
 }
 
+export interface Review {
+  _id: string;
+  user: string;
+  displayName: string;
+  studySpot: string;
+  rating: number;
+  content: string;
+  createdAt: Date;
+  updatedAt: Date;
+}
+
 export interface StudySpot {
   _id: string;
   partner: string;
@@ -40,4 +51,5 @@ export interface StudySpot {
   hasFreeWifi: boolean;
   website?: string;
   socialMedia?: SocialMediaLinks;
+  reviews?: Review[];
 }
