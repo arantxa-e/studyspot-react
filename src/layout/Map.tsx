@@ -1,9 +1,9 @@
-import MapboxMap, { Marker, NavigationControl } from "react-map-gl";
+import MapboxMap, { NavigationControl } from "react-map-gl";
 import React from "react";
 import { LocationOption, MapViewState, StudySpot } from "../types";
-import MarkerIcon from "../assets/mapbox-icon.png";
 import "mapbox-gl/dist/mapbox-gl.css";
-import { useLoaderData, useNavigate } from "react-router";
+import { useLoaderData } from "react-router";
+import { MapMarker } from "../common/MapMarker";
 
 export const Map: React.FC<{
   selectedLocation?: LocationOption;
@@ -11,7 +11,6 @@ export const Map: React.FC<{
   setViewState: React.Dispatch<React.SetStateAction<MapViewState>>;
 }> = ({ selectedLocation, viewState, setViewState }) => {
   const data = useLoaderData() as Array<StudySpot>;
-  const navigate = useNavigate();
 
   return (
     <MapboxMap
@@ -23,35 +22,15 @@ export const Map: React.FC<{
       mapStyle="mapbox://styles/mapbox/streets-v9"
     >
       {data?.map((studySpot) => {
-        return (
-          <Marker
-            key={studySpot.name}
-            longitude={studySpot.location.geometry.coordinates[0]}
-            latitude={studySpot.location.geometry.coordinates[1]}
-            style={{ cursor: "pointer" }}
-            onClick={() => navigate(`studyspot/${studySpot._id}`)}
-          >
-            <img
-              src={MarkerIcon}
-              alt={studySpot.name}
-              style={{ width: "50px", height: "50px" }}
-            />
-          </Marker>
-        );
+        return <MapMarker key={studySpot._id} studySpot={studySpot} />;
       })}
 
       {selectedLocation && (
-        <Marker
+        <MapMarker
           longitude={selectedLocation.geometry.coordinates[0]}
           latitude={selectedLocation.geometry.coordinates[1]}
-          style={{ cursor: "pointer" }}
-        >
-          <img
-            src={MarkerIcon}
-            alt="Selected location"
-            style={{ width: "50px", height: "50px" }}
-          />
-        </Marker>
+          currentLocation
+        />
       )}
 
       <NavigationControl showZoom position="top-right" />
