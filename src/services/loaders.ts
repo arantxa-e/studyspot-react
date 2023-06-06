@@ -14,7 +14,9 @@ export const getStudySpotByIdLoader = async ({
 }: LoaderFunctionArgs) => {
   if (!params.id) return;
   const response = await store
-    .dispatch(api.endpoints.getStudySpotById.initiate(params.id))
+    .dispatch(
+      api.endpoints.getStudySpotById.initiate(params.id, { forceRefetch: true })
+    )
     .unwrap();
   return response;
 };

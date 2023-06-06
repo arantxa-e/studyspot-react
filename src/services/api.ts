@@ -25,10 +25,6 @@ export const api = createApi({
     }),
     getStudySpotById: builder.query<StudySpot, string>({
       query: (id) => `/studyspots/${id}`,
-      providesTags: (result) =>
-        result
-          ? [{ type: "StudySpots" as const, id: result._id }, "StudySpots"]
-          : ["StudySpots"],
     }),
 
     // user endpoints
@@ -60,9 +56,6 @@ export const api = createApi({
         method: "post",
         body: payload,
       }),
-      invalidatesTags: (result, error, arg) => [
-        { type: "StudySpots", id: arg._id },
-      ],
     }),
   }),
 });

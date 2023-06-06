@@ -1,7 +1,7 @@
 import { Typography, Link } from "@mui/material";
-import { NavLink } from "react-router-dom";
+import { NavLink, useActionData } from "react-router-dom";
 import { Review, ReviewForm } from ".";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Review as ReviewInterface } from "../types";
 import { useAppSelector } from "../hooks";
 
@@ -12,6 +12,12 @@ export const Reviews: React.FC<{ reviews?: ReviewInterface[] }> = ({
   const [displayRatingForm, setDisplayRatingForm] = useState<boolean>(false);
   const toggleDisplayRatingForm = () =>
     setDisplayRatingForm(!displayRatingForm);
+
+  const data = useActionData();
+
+  useEffect(() => {
+    if (data) toggleDisplayRatingForm();
+  }, [data]);
 
   return (
     <>
