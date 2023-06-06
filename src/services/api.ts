@@ -1,5 +1,5 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
-import { AuthenticatedUser, User, StudySpot } from "../types";
+import { AuthenticatedUser, User, StudySpot, Review } from "../types";
 import { RootState } from "../store";
 
 const baseUrl = import.meta.env.VITE_STUDYSPOT_API_BASE_URL;
@@ -16,6 +16,7 @@ export const api = createApi({
       return headers;
     },
   }),
+  tagTypes: ["StudySpots"],
 
   endpoints: (builder) => ({
     // studyspot endpoints
@@ -24,6 +25,10 @@ export const api = createApi({
     }),
     getStudySpotById: builder.query<StudySpot, string>({
       query: (id) => `/studyspots/${id}`,
+      providesTags: (result) =>
+        result
+          ? [{ type: "StudySpots" as const, id: result._id }, "StudySpots"]
+          : ["StudySpots"],
     }),
 
     // user endpoints
@@ -46,6 +51,18 @@ export const api = createApi({
         url: "/user/logout",
         method: "post",
       }),
+    }),
+
+    // review endoints
+    addReview: builder.mutation<Review, Partial<Review>>({
+      query: (payload) => ({
+        url: "/reviews",
+        method: "post",
+        body: payload,
+      }),
+      invalidatesTags: (result, error, arg) => [
+        { type: "StudySpots", id: arg._id },
+      ],
     }),
   }),
 });
