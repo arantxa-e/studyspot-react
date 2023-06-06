@@ -5,6 +5,7 @@ import {
   getStudySpotsLoader,
   createUserAction,
   loginUserAction,
+  addReviewAction,
 } from "./services";
 
 export const router = createBrowserRouter([
@@ -21,6 +22,7 @@ export const router = createBrowserRouter([
         path: "/studyspot/:id",
         element: <StudySpot />,
         loader: getStudySpotByIdLoader,
+        action: addReviewAction,
       },
       {
         path: "/sign-up",

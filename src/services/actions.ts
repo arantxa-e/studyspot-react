@@ -3,6 +3,7 @@ import { store } from "../store";
 import { api } from "./api";
 import { User } from "../types/user";
 import { setCredentials } from "../reducers/authSlice";
+import { Review } from "../types";
 
 export const createUserAction = async ({ request }: ActionFunctionArgs) => {
   const formData = await request.formData();
@@ -34,4 +35,18 @@ export const logoutUserAction = async () => {
   store.dispatch(setCredentials({ user: undefined, token: undefined }));
 
   return redirect(`/`);
+};
+
+export const addReviewAction = async ({
+  params,
+  request,
+}: ActionFunctionArgs) => {
+  if (!params.id) return;
+
+  const formData = await request.formData();
+  formData.append("studySpot", params.id);
+
+  return await store
+    .dispatch(api.endpoints.addReview.initiate(formData as Partial<Review>))
+    .unwrap();
 };
