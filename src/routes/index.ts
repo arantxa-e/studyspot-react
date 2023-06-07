@@ -1,5 +1,5 @@
 export * from "./Root";
 export * from "./Home";
 export * from "./StudySpot";
-export * from "./Login";
-export * from "./SignUp";
+export * from "./UserLogin";
+export * from "./UserSignUp";

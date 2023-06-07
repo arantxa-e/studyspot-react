@@ -30,7 +30,7 @@ function Copyright() {
   );
 }
 
-export const SignUp = () => {
+export const UserSignUp = () => {
   return (
     <Container component="main" maxWidth="xs">
       <CssBaseline />

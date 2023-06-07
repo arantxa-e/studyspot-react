@@ -32,7 +32,7 @@ function Copyright() {
   );
 }
 
-export const Login = () => {
+export const UserLogin = () => {
   return (
     <Container component="main" maxWidth="xs">
       <CssBaseline />
