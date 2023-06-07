@@ -3,6 +3,8 @@ import { StudySpotCard } from "../common";
 import { useState, useEffect } from "react";
 import { LocationOption, MapViewState, StudySpot } from "../types";
 import { useLoaderData } from "react-router";
+import { NavLink } from "react-router-dom";
+import { Typography } from "@mui/material";
 
 export const Home = () => {
   const studySpots = useLoaderData() as Array<StudySpot>;
@@ -31,6 +33,11 @@ export const Home = () => {
 
   return (
     <div>
+      <Typography>
+        Want to add or manage your listing?{" "}
+        <NavLink to="/partner/sign-up">Sign up</NavLink> or{" "}
+        <NavLink to="/partner/login">login</NavLink> as a partner.
+      </Typography>
       <Search
         setSelectedLocation={setSelectedLocation}
         setViewState={setViewState}

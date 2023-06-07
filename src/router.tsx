@@ -15,7 +15,9 @@ import {
   createPartnerAction,
   loginPartnerAction,
   addReviewAction,
+  getPartnerLoader,
 } from "./services";
+import { PartnerDashboard } from "./routes/PartnerDashboard";
 
 export const router = createBrowserRouter([
   {
@@ -52,6 +54,11 @@ export const router = createBrowserRouter([
         path: "/partner/sign-up",
         element: <PartnerSignUp />,
         action: createPartnerAction,
+      },
+      {
+        path: "/partner/dashboard",
+        element: <PartnerDashboard />,
+        loader: getPartnerLoader,
       },
     ],
   },

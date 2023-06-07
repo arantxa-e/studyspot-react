@@ -67,7 +67,7 @@ export const createPartnerAction = async ({ request }: ActionFunctionArgs) => {
 
   store.dispatch(setUserCredentials(user));
 
-  return redirect(`/`);
+  return redirect(`/partner/dashboard`);
 };
 
 export const loginPartnerAction = async ({ request }: ActionFunctionArgs) => {
@@ -80,7 +80,7 @@ export const loginPartnerAction = async ({ request }: ActionFunctionArgs) => {
   store.dispatch(setPartnerCredentials(user));
   localStorage.setItem("partner", JSON.stringify(user));
 
-  return redirect(`/`);
+  return redirect(`/partner/dashboard`);
 };
 
 export const logoutPartnerAction = async () => {

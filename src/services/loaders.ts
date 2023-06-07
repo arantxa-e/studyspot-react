@@ -20,3 +20,10 @@ export const getStudySpotByIdLoader = async ({
     .unwrap();
   return response;
 };
+
+export const getPartnerLoader = async () => {
+  const response = await store
+    .dispatch(api.endpoints.getPartner.initiate())
+    .unwrap();
+  return response;
+};
