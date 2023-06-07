@@ -24,10 +24,10 @@ export const Navbar = () => {
             </>
           ) : (
             <>
-              <Button color="inherit" onClick={() => navigate("/sign-up")}>
+              <Button color="inherit" onClick={() => navigate("/user/sign-up")}>
                 Sign Up
               </Button>
-              <Button color="inherit" onClick={() => navigate("/login")}>
+              <Button color="inherit" onClick={() => navigate("/user/login")}>
                 Log In
               </Button>
             </>
