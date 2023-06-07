@@ -25,6 +25,7 @@ export const loginUserAction = async ({ request }: ActionFunctionArgs) => {
     .unwrap();
 
   store.dispatch(setCredentials(user));
+  localStorage.setItem("user", JSON.stringify(user));
 
   return redirect(`/`);
 };
@@ -33,6 +34,7 @@ export const logoutUserAction = async () => {
   await store.dispatch(api.endpoints.logoutUser.initiate()).unwrap();
 
   store.dispatch(setCredentials({ user: undefined, token: undefined }));
+  localStorage.clear();
 
   return redirect(`/`);
 };
