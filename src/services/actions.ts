@@ -56,6 +56,20 @@ export const addReviewAction = async ({
     .unwrap();
 };
 
+export const createPartnerAction = async ({ request }: ActionFunctionArgs) => {
+  const formData = await request.formData();
+
+  const user = await store
+    .dispatch(
+      api.endpoints.createPartner.initiate(formData as Partial<Partner>)
+    )
+    .unwrap();
+
+  store.dispatch(setUserCredentials(user));
+
+  return redirect(`/`);
+};
+
 export const loginPartnerAction = async ({ request }: ActionFunctionArgs) => {
   const formData = await request.formData();
 

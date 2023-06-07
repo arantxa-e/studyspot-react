@@ -12,6 +12,7 @@ import {
   getStudySpotsLoader,
   createUserAction,
   loginUserAction,
+  createPartnerAction,
   loginPartnerAction,
   addReviewAction,
 } from "./services";
@@ -50,6 +51,7 @@ export const router = createBrowserRouter([
       {
         path: "/partner/sign-up",
         element: <PartnerSignUp />,
+        action: createPartnerAction,
       },
     ],
   },
