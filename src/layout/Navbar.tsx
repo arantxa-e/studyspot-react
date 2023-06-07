@@ -1,11 +1,14 @@
 import { AppBar, Toolbar, Typography, Button } from "@mui/material";
 import { NavLink, useNavigate } from "react-router-dom";
 import { useAppSelector } from "../hooks";
-import { logoutUserAction } from "../services";
+import { logoutPartnerAction, logoutUserAction } from "../services";
+import { selectCurrentPartner, selectCurrentUser } from "../reducers";
 
 export const Navbar = () => {
   const navigate = useNavigate();
-  const user = useAppSelector((state) => state.auth.user);
+  const user = useAppSelector(selectCurrentUser);
+  const partner = useAppSelector(selectCurrentPartner);
+  const loggedInUser = user || partner;
 
   return (
     <>
@@ -15,14 +18,19 @@ export const Navbar = () => {
             <NavLink to="/">StudySpot</NavLink>
           </Typography>
 
-          {user ? (
+          {loggedInUser && (
             <>
-              <Typography>{user.displayName}</Typography>
-              <Button color="inherit" onClick={logoutUserAction}>
+              <Typography>{user?.displayName ?? partner?.company}</Typography>
+              <Button
+                color="inherit"
+                onClick={user ? logoutUserAction : logoutPartnerAction}
+              >
                 Log Out
               </Button>
             </>
-          ) : (
+          )}
+
+          {!loggedInUser && (
             <>
               <Button color="inherit" onClick={() => navigate("/user/sign-up")}>
                 Sign Up
