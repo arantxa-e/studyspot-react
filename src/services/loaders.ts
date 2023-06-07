@@ -23,7 +23,7 @@ export const getStudySpotByIdLoader = async ({
 
 export const getPartnerLoader = async () => {
   const response = await store
-    .dispatch(api.endpoints.getPartner.initiate())
+    .dispatch(api.endpoints.getPartnerProfile.initiate())
     .unwrap();
   return response;
 };

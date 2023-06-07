@@ -57,8 +57,8 @@ export const api = createApi({
         body: payload,
       }),
     }),
-    getPartner: builder.query<Partner, void>({
-      query: () => `/partner`,
+    getPartnerProfile: builder.query<Partner, void>({
+      query: () => `/partner/profile`,
     }),
     loginPartner: builder.mutation<AuthenticatedUser, Partial<Partner>>({
       query: (payload) => ({
