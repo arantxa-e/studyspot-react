@@ -1,6 +1,6 @@
 import decodeToken, { JwtPayload } from "jwt-decode";
 import { AuthenticatedUser } from "../types";
-import { setCredentials } from "../reducers";
+import { setUserCredentials } from "../reducers";
 import { store } from "../store";
 
 export const persistAuthUser = () => {
@@ -14,10 +14,10 @@ export const persistAuthUser = () => {
       if (token.exp && Date.now() >= token.exp * 1000) {
         localStorage.clear();
         return store.dispatch(
-          setCredentials({ user: undefined, token: undefined })
+          setUserCredentials({ user: undefined, token: undefined })
         );
       } else {
-        return store.dispatch(setCredentials(user));
+        return store.dispatch(setUserCredentials(user));
       }
     }
   }

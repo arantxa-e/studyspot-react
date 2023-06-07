@@ -1,5 +1,5 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
-import { AuthenticatedUser, User, StudySpot, Review } from "../types";
+import { AuthenticatedUser, User, Partner, StudySpot, Review } from "../types";
 import { RootState } from "../store";
 
 const baseUrl = import.meta.env.VITE_STUDYSPOT_API_BASE_URL;
@@ -45,6 +45,28 @@ export const api = createApi({
     logoutUser: builder.mutation<void, void>({
       query: () => ({
         url: "/user/logout",
+        method: "post",
+      }),
+    }),
+
+    // partner endpoints
+    createPartner: builder.mutation<AuthenticatedUser, Partial<Partner>>({
+      query: (payload) => ({
+        url: "/partner",
+        method: "post",
+        body: payload,
+      }),
+    }),
+    loginPartner: builder.mutation<AuthenticatedUser, Partial<Partner>>({
+      query: (payload) => ({
+        url: "/partner/login",
+        method: "post",
+        body: payload,
+      }),
+    }),
+    logoutPartner: builder.mutation<void, void>({
+      query: () => ({
+        url: "/partner/logout",
         method: "post",
       }),
     }),

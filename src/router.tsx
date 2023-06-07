@@ -3,16 +3,16 @@ import {
   Root,
   Home,
   StudySpot,
+  Login,
   UserSignUp,
-  UserLogin,
   PartnerSignUp,
-  PartnerLogin,
 } from "./routes";
 import {
   getStudySpotByIdLoader,
   getStudySpotsLoader,
   createUserAction,
   loginUserAction,
+  loginPartnerAction,
   addReviewAction,
 } from "./services";
 
@@ -39,16 +39,17 @@ export const router = createBrowserRouter([
       },
       {
         path: "/user/login",
-        element: <UserLogin />,
+        element: <Login />,
         action: loginUserAction,
+      },
+      {
+        path: "/partner/login",
+        element: <Login />,
+        action: loginPartnerAction,
       },
       {
         path: "/partner/sign-up",
         element: <PartnerSignUp />,
-      },
-      {
-        path: "/partner/login",
-        element: <PartnerLogin />,
       },
     ],
   },

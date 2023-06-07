@@ -22,6 +22,11 @@ export type AuthenticatedUser = {
   token: string;
 };
 
+export type AuthenticatedPartner = {
+  partner: Partner;
+  token: string;
+};
+
 export type AuthState = {
   user: User | null;
   token: string | null;
