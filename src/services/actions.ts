@@ -65,7 +65,7 @@ export const createPartnerAction = async ({ request }: ActionFunctionArgs) => {
     )
     .unwrap();
 
-  store.dispatch(setUserCredentials(user));
+  store.dispatch(setPartnerCredentials(user));
 
   return redirect(`/partner/dashboard`);
 };

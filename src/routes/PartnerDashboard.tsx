@@ -1,8 +1,13 @@
-import { selectCurrentPartner } from "../reducers";
-import { useAppSelector } from "../hooks";
+import { useLoaderData } from "react-router";
+import { Partner } from "../types";
+import { Typography } from "@mui/material";
 
 export const PartnerDashboard = () => {
-  const partner = useAppSelector((state) => selectCurrentPartner(state));
+  const partner = useLoaderData() as Partner;
 
-  return <div>{partner?.company} Dashboard</div>;
+  return (
+    <Typography variant="h5" component="h1">
+      {partner?.company} Dashboard
+    </Typography>
+  );
 };
