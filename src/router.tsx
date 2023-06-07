@@ -1,5 +1,13 @@
 import { createBrowserRouter } from "react-router-dom";
-import { Root, Home, StudySpot, UserSignUp, UserLogin } from "./routes";
+import {
+  Root,
+  Home,
+  StudySpot,
+  UserSignUp,
+  UserLogin,
+  PartnerSignUp,
+  PartnerLogin,
+} from "./routes";
 import {
   getStudySpotByIdLoader,
   getStudySpotsLoader,
@@ -33,6 +41,14 @@ export const router = createBrowserRouter([
         path: "/user/login",
         element: <UserLogin />,
         action: loginUserAction,
+      },
+      {
+        path: "/partner/sign-up",
+        element: <PartnerSignUp />,
+      },
+      {
+        path: "/partner/login",
+        element: <PartnerLogin />,
       },
     ],
   },
